@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman Edit Data</title>
+        <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    >
     <style>
         form {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin-top: 50px;
+            margin-top: 90px;
         }
 
         h1 {
@@ -23,10 +27,10 @@
     </style>
 </head>
 <body>
+    <h1>HALAMAN EDIT DATA PELANGGAN</h1>
 <form action="{{ route('pelanggans.update', $pelanggan->id) }}" method="POST">
     @csrf
     @method('PUT')
-
     <table>
         <tr>
             <td><label>Kode Pelanggan</label></td>
@@ -82,8 +86,8 @@
         </tr>
         <tr>
             <td colspan="3">
-                <button type="submit">Simpan Perubahan</button>
-                <a href="{{ route('pelanggans.index') }}">Batal</a>
+            <CENTER><button type="submit">Simpan Perubahan</button>
+                <a href="{{ route('pelanggans.index') }}">Batal</a></CENTER> 
             </td>
         </tr>
     </table>
