@@ -13,6 +13,18 @@
 <div class="container">
     <h1 class="text-center">Daftar Pelanggan</h1>
 
+    <p>
+        <a href="{{ route('pelanggans.create') }}">
+            Tambah Produk
+        </a>
+    </p>
+
+    @session('success')
+    <p style="color: green">
+        {{ session('success') }}
+    </p>
+    @endsession
+
 <table border="1" cellpadding="10" class="table table-bordered my-4 mx-auto w-75">
     <thead>
         <tr>
@@ -27,7 +39,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ( $pelanggans as $pelanggan )
+        @foreach (  $pelanggans as $pelanggan )
         <tr>
             <td>{{ $pelanggan->id }}</td>
             <td>{{ $pelanggan->kode_pelanggan }}</td>
@@ -39,9 +51,11 @@
             <td>{{ $pelanggan->keterangan }}</td>
         </tr>
         @endforeach
-        
     </tbody>
 </table>   
+</div>
+<div>
+    {{ $pelanggans->links() }}
 </div>
 </body>
 </html>
