@@ -40,7 +40,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (  $pelanggans as $pelanggan )
+    @forelse ($pelanggans as $pelanggan)
         <tr>
             <td>{{ $pelanggan->id }}</td>
             <td>{{ $pelanggan->kode_pelanggan }}</td>
@@ -52,10 +52,21 @@
             <td>{{ $pelanggan->keterangan }}</td>
             <td>
                 <a href="{{ route('pelanggans.edit', $pelanggan->id) }}">Edit</a>
+                <form action="{{ route('pelanggans.destroy', $pelanggan->id) }}" method="post" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus data pelanggan ini? ')">
+                        Hapus
+                    </button>
+                </form>
             </td>
         </tr>
-        @endforeach
-    </tbody>
+    @empty
+        <tr>
+            <td colspan="9" style="text-align: center;">Belum ada data pelanggan nih</td>
+        </tr>
+    @endforelse
+</tbody>
 </table>   
 </div>
 <div>

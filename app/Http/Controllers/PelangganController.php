@@ -64,10 +64,8 @@ class PelangganController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Pelanggan $pelanggan)
     {
-
-    $pelanggan = Pelanggan::findOrFail($id);
 
     $data = $request->validate([
         'kode_pelanggan' => 'required|string|unique:pelanggans,kode_pelanggan,' . $pelanggan->id,
@@ -89,8 +87,10 @@ class PelangganController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Pelanggan $pelanggan)
     {
-        //
+        $pelanggan->delete();
+
+        return redirect()->route('pelanggans.index')->with('success', 'Data pelanggan berhasil dihapus');
     }
 }
