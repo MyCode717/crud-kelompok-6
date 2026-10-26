@@ -36,6 +36,7 @@
             <th>Tanggal Daftar</th>
             <th>Alamat</th>
             <th>Keterangan</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -49,6 +50,9 @@
             <td>{{ $pelanggan->tanggal_daftar->translatedFormat('d F Y') }}</td>
             <td>{{ $pelanggan->alamat }}</td>
             <td>{{ $pelanggan->keterangan }}</td>
+            <td>
+                <a href="{{ route('pelanggans.edit', $pelanggan->id) }}">Edit</a>
+            </td>
         </tr>
         @endforeach
     </tbody>
