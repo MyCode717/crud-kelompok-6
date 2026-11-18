@@ -48,7 +48,9 @@ class PelangganController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $pelanggan = Pelanggan::findOrFail($id);
+
+        return view('pelanggan.show', compact('pelanggan'));
     }
 
     /**
