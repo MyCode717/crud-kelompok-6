@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,24 +12,81 @@
     rel="stylesheet"
     >
     <style>
+               .form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         form {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin-top: 90px;
+            margin-top: 50px;
+            border: 1px solid;
+            width: 500px;
+            padding: 5px;
+            border-radius: 15px;
+        }
+
+        input {
+            border: 1px solid;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        select {
+            border: 1px solid;
+            padding: 5px;
+            box-sizing: border-box;
+            border-radius: 5px;
         }
 
         h1 {
             display: flex;
             justify-content: center;
         }
+
         td {
             padding: 10px;
+        }
+
+        .button-green {
+            padding: 7px;
+            background-color: #008000;
+            border: 1px solid #008000;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .button-red {
+            padding: 7px;
+            background-color: #c1121f;
+            border: 1px solid #c1121f;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        textarea {
+            border: 1px solid;
+            border-radius: 5px;
+        }
+
+        .link-index {
+            text-decoration: none;
+            padding: 10px;
+            border: 1px solid;
+            margin-top: 10px;
+            border-radius: 5px;
+            background-color: #023e8a;
+            color: #fff;
         }
     </style>
 </head>
 <body>
+    <div class="form">
     <h1>HALAMAN EDIT DATA PELANGGAN</h1>
 <form action="{{ route('pelanggans.update', $pelanggan->id) }}" method="POST">
     @csrf
@@ -52,6 +112,7 @@
             <td>
                 <select name="kategori">
                     <option value="Reguler" {{ old('kategori', $pelanggan->kategori) == 'Reguler' ? 'selected' : '' }}>Reguler</option>
+                    <option value="Reguler" {{ old('kategori', $pelanggan->kategori) == 'Premium' ? 'selected' : '' }}>Premium</option>
                     <option value="VIP" {{ old('kategori', $pelanggan->kategori) == 'VIP' ? 'selected' : '' }}>VIP</option>
                 </select>
             </td>
@@ -86,16 +147,16 @@
         </tr>
         <tr>
             <td colspan="3">
-            <CENTER><button type="submit">Simpan Perubahan</button>
-                <a href="{{ route('pelanggans.index') }}">Batal</a></CENTER> 
+            <CENTER><button type="submit" class="button-green">Simpan Perubahan</button>
+                <a href="{{ route('pelanggans.index') }}" class="button-red">Batal</a></CENTER> 
             </td>
         </tr>
     </table>
 </form>
-    <p>
-        <a href="{{ route('pelanggans.index') }}">
-            <center>Kembali ke Produk</center> 
+        <a href="{{ route('pelanggans.index') }}" class="link-index">
+            <center>Kembali ke Daftar Pelanggan</center> 
         </a>
-    </p>
+    </div>
 </body>
 </html>
+@endsection

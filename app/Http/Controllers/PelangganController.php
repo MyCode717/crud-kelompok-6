@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PelangganController extends Controller
 {
@@ -66,12 +67,18 @@ class PelangganController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pelanggan $pelanggan)
-    {
 
-    $data = $request->validate([
-        'kode_pelanggan' => 'required|string|unique:pelanggans,kode_pelanggan,' . $pelanggan->id,
-        'nama' => 'required|string|max:255',
+public function update(Request $request, Pelanggan $pelanggan)
+{
+    $validated = $request->validate([
+        'kode_pelanggan' => [
+            'required',
+            'string',
+            Rule::unique('pelanggans', 'kode_pelanggan')
+                ->ignore($pelanggan->id),
+        ],
+
+        'nama' => 'required|string',
         'kategori' => 'required|string',
         'email' => 'required|email',
         'tanggal_daftar' => 'required|date',
@@ -79,12 +86,12 @@ class PelangganController extends Controller
         'keterangan' => 'nullable|string',
     ]);
 
-    $pelanggan->update($data);
+    $pelanggan->update($validated);
 
     return redirect()
         ->route('pelanggans.index')
         ->with('success', 'Data pelanggan berhasil diperbarui!');
-    }
+}
 
     /**
      * Remove the specified resource from storage.
